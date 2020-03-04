@@ -1,6 +1,8 @@
 #ifndef HEADER_CBEEA770_5E54_11EA_91B2_784F43782D09
 #define HEADER_CBEEA770_5E54_11EA_91B2_784F43782D09
 
+#include <utility>
+
 namespace memo
 {
 
@@ -15,7 +17,7 @@ class Memorizer
 	template<typename... ARGS>
 	auto operator()(ARGS&&... args)
 	{
-		return _callable(args...);
+		return _callable(std::forward<ARGS>(args)...);
 	}
 
 	const CALLABLE& _callable;
