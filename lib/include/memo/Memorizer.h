@@ -1,13 +1,14 @@
 #ifndef HEADER_CBEEA770_5E54_11EA_91B2_784F43782D09
 #define HEADER_CBEEA770_5E54_11EA_91B2_784F43782D09
 
-#include <utility>
+#include <iterator>
 #include <tuple>
+#include <utility>
 
 namespace memo
 {
 
-template<typename CACHE, typename CALLABLE>
+template<typename CALLABLE, typename CACHE>
 class Memorizer
 {
 	public:
@@ -20,7 +21,7 @@ class Memorizer
 	auto operator()(ARGS&&... args)
 	{
 		auto it = _cache.find(std::tuple(args...));
-		if (it != _cache.end())
+		if (std::end(_cache) != it)
 		{
 			return it->second;
 		}

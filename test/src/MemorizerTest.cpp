@@ -2,8 +2,8 @@
 
 #include <gtest/gtest.h>
 
-#include <string>
 #include <map>
+#include <string>
 #include <tuple>
 
 std::string operator "" _s(const char* s, std::size_t len)
