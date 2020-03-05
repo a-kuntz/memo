@@ -34,8 +34,7 @@ auto bar(const std::string& a, const std::string& b)
 TEST(memo, memorize_foo)
 {
 	{
-		using CacheType = std::map<std::tuple<int>, int>;
-		memo::Memorizer m(fo, CacheType());
+		memo::Memorizer m(memo::Cache<int, int>(), fo);
 
 		counter = 0;
 		EXPECT_EQ(m(1), 1);	// calculated
@@ -50,7 +49,7 @@ TEST(memo, memorize_foo)
 	}
 
 	{
-		memo::Memorizer m(foo, memo::Cache<int, int, int>());
+		memo::Memorizer m(memo::Cache<int, int, int>(), foo);
 
 		counter = 0;
 		EXPECT_EQ(m(1, 2), 3);
@@ -60,7 +59,7 @@ TEST(memo, memorize_foo)
 	}
 
 	{
-		memo::Memorizer m(bar, memo::Cache<std::string, std::string, std::string>());
+		memo::Memorizer m(memo::Cache<std::string, std::string, std::string>(), bar);
 
 		counter = 0;
 		EXPECT_EQ(m("hallo"_s, "welt"_s), "hallowelt");
@@ -74,7 +73,7 @@ TEST(memo, memorize_lambda)
 {
 	{
 		auto lambda = [](const std::string& arg){++counter; return arg;};
-		memo::Memorizer m(lambda, memo::Cache<std::string, std::string>());
+		memo::Memorizer m(memo::Cache<std::string, std::string>(), lambda);
 
 		counter = 0;
 		EXPECT_EQ(m("hello"_s), "hello");
@@ -84,7 +83,7 @@ TEST(memo, memorize_lambda)
 	}
 
 	{
-		memo::Memorizer m([](const std::string& arg){++counter; return arg;}, memo::Cache<std::string, std::string>());
+		memo::Memorizer m(memo::Cache<std::string, std::string>(), [](const std::string& arg){++counter; return arg;});
 
 		counter = 0;
 		EXPECT_EQ(m("hello"_s), "hello");
