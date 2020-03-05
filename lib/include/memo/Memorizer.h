@@ -2,11 +2,15 @@
 #define HEADER_CBEEA770_5E54_11EA_91B2_784F43782D09
 
 #include <iterator>
+#include <map>
 #include <tuple>
 #include <utility>
 
 namespace memo
 {
+
+template<typename RESULT, typename... ARGS>
+using Cache = std::map<std::tuple<ARGS...>, RESULT>;
 
 template<typename CALLABLE, typename CACHE>
 class Memorizer
