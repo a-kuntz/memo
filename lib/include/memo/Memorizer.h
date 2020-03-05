@@ -12,9 +12,8 @@ template<typename CALLABLE, typename CACHE>
 class Memorizer
 {
 	public:
-	Memorizer(const CALLABLE& callable, CACHE& cache)
+	Memorizer(const CALLABLE& callable, CACHE)
 	: _callable(callable)
-	, _cache(cache)
 	{}
 
 	template<typename... ARGS>
@@ -33,7 +32,7 @@ class Memorizer
 	}
 
 	const CALLABLE& _callable;
-	CACHE& _cache;
+	CACHE _cache;
 };
 
 } // memo

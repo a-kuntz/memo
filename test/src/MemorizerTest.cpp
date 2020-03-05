@@ -35,8 +35,7 @@ TEST(memo, memorize_foo)
 {
 	{
 		using CacheType = std::map<std::tuple<int>, int>;
-		CacheType cache;
-		memo::Memorizer m(fo, cache);
+		memo::Memorizer m(fo, CacheType());
 
 		counter = 0;
 		EXPECT_EQ(m(1), 1);	// calculated
@@ -52,8 +51,7 @@ TEST(memo, memorize_foo)
 
 	{
 		using CacheType = std::map<std::tuple<int, int>, int>;
-		CacheType cache;
-		memo::Memorizer m(foo, cache);
+		memo::Memorizer m(foo, CacheType());
 
 		counter = 0;
 		EXPECT_EQ(m(1, 2), 3);
@@ -64,8 +62,7 @@ TEST(memo, memorize_foo)
 
 	{
 		using CacheType = std::map<std::tuple<std::string, std::string>, std::string>;
-		CacheType cache;
-		memo::Memorizer m(bar, cache);
+		memo::Memorizer m(bar, CacheType());
 
 		counter = 0;
 		EXPECT_EQ(m("hallo"_s, "welt"_s), "hallowelt");
@@ -80,8 +77,7 @@ TEST(memo, memorize_lambda)
 	{
 		auto lambda = [](const std::string& arg){++counter; return arg;};
 		using CacheType = std::map<std::tuple<std::string>, std::string>;
-		CacheType cache;
-		memo::Memorizer m(lambda, cache);
+		memo::Memorizer m(lambda, CacheType());
 
 		counter = 0;
 		EXPECT_EQ(m("hello"_s), "hello");
@@ -92,8 +88,7 @@ TEST(memo, memorize_lambda)
 
 	{
 		using CacheType = std::map<std::tuple<std::string>, std::string>;
-		CacheType cache;
-		memo::Memorizer m([](const std::string& arg){++counter; return arg;}, cache);
+		memo::Memorizer m([](const std::string& arg){++counter; return arg;}, CacheType());
 
 		counter = 0;
 		EXPECT_EQ(m("hello"_s), "hello");
