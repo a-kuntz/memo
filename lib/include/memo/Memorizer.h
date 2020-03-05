@@ -20,7 +20,15 @@ class Memorizer
 	auto operator()(ARGS&&... args)
 	{
 		auto it = _cache.find(std::tuple(args...));
-		return _callable(std::forward<ARGS>(args)...);
+		if (it != _cache.end())
+		{
+			return it->second;
+		}
+
+		auto res = _callable(std::forward<ARGS>(args)...);
+		_cache.emplace(std::tuple(args...), res);
+
+		return res;
 	}
 
 	const CALLABLE& _callable;
