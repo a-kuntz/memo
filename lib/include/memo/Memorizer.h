@@ -35,6 +35,11 @@ class Memorizer
 		return res;
 	}
 
+	auto size() const
+	{
+		return _cache.size();
+	}
+
 	const CALLABLE& _callable;
 	CACHE _cache;
 };
