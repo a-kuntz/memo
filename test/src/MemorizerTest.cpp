@@ -17,7 +17,7 @@ auto identity(int a)
 
 TEST(memo, memorize_identity)
 {
-	memo::Memorizer cached_identity(memo::Cache<int, int>(), identity);
+	memo::Memorizer cached_identity(identity, memo::Cache<int, int>());
 
 	call_counter = 0;
 	for (int val=1; val<10; ++val)
@@ -39,7 +39,7 @@ auto add(int a, int b)
 
 TEST(memo, memorize_add)
 {
-	memo::Memorizer cached_add(memo::Cache<int, int, int>(), add);
+	memo::Memorizer cached_add(add, memo::Cache<int, int, int>());
 
 	call_counter = 0;
 	for (int val=1; val<10; ++val)
@@ -66,7 +66,7 @@ std::string operator "" _s(const char* s, std::size_t len)
 
 TEST(memo, memorize_concat)
 {
-	memo::Memorizer cached_concat(memo::Cache<std::string, std::string, std::string>(), concat);
+	memo::Memorizer cached_concat(concat, memo::Cache<std::string, std::string, std::string>());
 
 	call_counter = 0;
 	EXPECT_EQ("hallowelt", cached_concat("hallo"_s, "welt"_s));
@@ -81,7 +81,7 @@ TEST(memo, memorize_lambda)
 {
 	{
 		auto lambda = [](const std::string& val){++call_counter; return val;};
-		memo::Memorizer cached_lambda(memo::Cache<std::string, std::string>(), lambda);
+		memo::Memorizer cached_lambda(lambda, memo::Cache<std::string, std::string>());
 
 		call_counter = 0;
 		EXPECT_EQ("hello", cached_lambda("hello"_s));
@@ -93,7 +93,7 @@ TEST(memo, memorize_lambda)
 	}
 
 	{
-		memo::Memorizer cached_lambda(memo::Cache<std::string, std::string>(), [](const std::string& val){++call_counter; return val;});
+		memo::Memorizer cached_lambda([](const std::string& val){++call_counter; return val;}, memo::Cache<std::string, std::string>());
 
 		call_counter = 0;
 		EXPECT_EQ("hello", cached_lambda("hello"_s));

@@ -12,11 +12,11 @@ namespace memo
 template<typename RESULT, typename... ARGS>
 using Cache = std::map<std::tuple<ARGS...>, RESULT>;
 
-template<typename CACHE, typename CALLABLE>
+template<typename CALLABLE, typename CACHE>
 class Memorizer
 {
 	public:
-	Memorizer(CACHE, const CALLABLE& callable)
+	Memorizer(const CALLABLE& callable, CACHE)
 	: _callable(callable)
 	{}
 
