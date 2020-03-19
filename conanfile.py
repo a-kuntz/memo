@@ -31,9 +31,7 @@ class MemorizerConan(ConanFile):
         self.copy("*.h", dst="include", src="lib/include")
 
     # def package_info(self):
-    # #     self.cpp_info.libs = ["memo"]
-    #     self.cpp_info.libs = []
-    #     self.cpp_info.includedirs = ['lib/include']  # Ordered list of include paths
+    #     self.cpp_info.includedirs = ['include']  # Ordered list of include paths
 
     def package_id(self):
         self.info.header_only()
