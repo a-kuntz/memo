@@ -22,10 +22,10 @@ class MemorizerConan(ConanFile):
 
     def build(self):
         cmake = CMake(self)
-        # cmake.verbose = True
+        cmake.verbose = True
         cmake.configure(source_folder="memo")
         cmake.build()
-        cmake.test()
+        cmake.test(output_on_failure=True)
 
     def package(self):
         self.copy("*.h", dst="include", src="lib/include")

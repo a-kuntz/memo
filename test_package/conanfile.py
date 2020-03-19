@@ -17,4 +17,4 @@ class MemorizerTestConan(ConanFile):
 
     def test(self):
         cmake = CMake(self)
-        cmake.test()
+        cmake.test(output_on_failure=True)
