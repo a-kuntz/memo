@@ -1,8 +1,8 @@
 language:
   - cpp
 
-git:
-  depth: false
+# git:
+#   depth: false
 
 matrix:
   fast_finish: true
