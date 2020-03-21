@@ -5,7 +5,7 @@ git:
   depth: false
 
 matrix:
-  fast_finish: false
+  fast_finish: true
   include:
     - os: linux
       dist: bionic
