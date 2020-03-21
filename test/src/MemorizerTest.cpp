@@ -2,10 +2,7 @@
 
 #include <gtest/gtest.h>
 
-#include <map>
-#include <numeric>
 #include <string>
-#include <tuple>
 
 int call_counter;
 
