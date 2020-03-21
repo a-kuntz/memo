@@ -28,9 +28,8 @@ matrix:
     - os: osx
 
 install:
-  - which cmake
-  - cmake --version
-# Install dependencies
+  - g++ --version
+# Install conan
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then pip install conan; fi
   - which conan
   - conan user
