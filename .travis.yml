@@ -28,7 +28,6 @@ matrix:
     - os: osx
 
 install:
-  - g++ --version
 # Install conan
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then pip install conan; fi
   - which conan
