@@ -2,6 +2,8 @@
 
 Simple function memorizer library
 
+[![Build Status](https://travis-ci.org/a-kuntz/memo.svg?branch=master)](https://travis-ci.org/a-kuntz/memo)
+
 ## Abstract
 
 The memorizer stores results of expensive calculations and returns the cached value in case the same input is received a second time.
