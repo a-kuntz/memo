@@ -17,15 +17,6 @@ matrix:
       compiler: gcc
 
     - os: osx
-      osx_image: xcode10.3
-      language: cpp
-      addons:
-        homebrew:
-          packages:
-          - conan
-          - cmake
-
-    - os: osx
       osx_image: xcode11
       language: cpp
       addons:
@@ -38,6 +29,8 @@ matrix:
     - os: osx
 
 install:
+  - which cmake
+  - cmake --version
 # Install dependencies
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then pip install conan; fi
 # recipe adopted from https://cliutils.gitlab.io/modern-cmake/chapters/intro/installing.html
