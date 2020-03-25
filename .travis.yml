@@ -25,8 +25,8 @@ jobs:
      - os: osx
        osx_image: xcode11
 
-   allow_failures:
-     - os: osx
+  #  allow_failures:
+  #    - os: osx
 
 install:
   - python --version
