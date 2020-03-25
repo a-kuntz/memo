@@ -1,38 +1,44 @@
-language:
-  - cpp
+language: cpp
+dist: bionic
+os: linux
 
-matrix:
-  fast_finish: true
-  include:
-    - os: linux
-      dist: bionic
-      compiler: clang
+compiler:
+  - gcc
+  - clang
 
-    - os: linux
-      dist: bionic
-      compiler: gcc
+addons:
+  apt:
+    packages:
+      - "python"
+      - "python-pip"
+  homebrew:
+    packages:
+    - conan
+    - cmake
+    update: true
 
-    - os: osx
-      osx_image: xcode11
-      language: cpp
-      addons:
-        homebrew:
-          packages:
-          - conan
-          - cmake
+jobs:
+   fast_finish: true
+   include:
+     - os: linux
 
-  allow_failures:
-    - os: osx
+     - os: osx
+       osx_image: xcode11
+
+   allow_failures:
+     - os: osx
 
 install:
+  - python --version
 # Install conan
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then pip install conan; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then pip --version; pip install conan; fi
   - which conan
+  - conan --version
   - conan user
 # install cmake 3.17
 # recipe adopted from https://cliutils.gitlab.io/modern-cmake/chapters/intro/installing.html
-#  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then mkdir -p cmake-3.15 && wget -qO- "https://cmake.org/files/v3.15/cmake-3.15.3-Linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C cmake-3.15; export PATH=`pwd`/cmake-3.15/bin:$PATH; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then mkdir -p cmake-3.17 && wget -qO- "https://cmake.org/files/v3.17/cmake-3.17.0-Linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C cmake-3.17; export PATH=`pwd`/cmake-3.17/bin:$PATH; fi
+#  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then mkdir -p cmake-3.15 && wget -qO- "https://cmake.org/files/v3.15/cmake-3.15.3-Linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C cmake-3.15; export PATH=$(pwd)/cmake-3.15/bin:$PATH; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then mkdir -p cmake-3.17 && wget -qO- "https://cmake.org/files/v3.17/cmake-3.17.0-Linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C cmake-3.17; export PATH=$(pwd)/cmake-3.17/bin:$PATH; fi
   - which cmake
   - cmake --version
 script:
